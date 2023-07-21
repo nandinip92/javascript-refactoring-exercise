@@ -36,9 +36,9 @@ function sortByAmountThenName(txCount) {
   });
 
   let sortedResults = {};
-  for (let objectKey of sortedKeys) {
-    sortedResults[objectKey] = txCount[objectKey];
-  }
+  sortedKeys.forEach(
+    (objectKey) => (sortedResults[objectKey] = txCount[objectKey])
+  );
 
   return sortedResults;
 }
