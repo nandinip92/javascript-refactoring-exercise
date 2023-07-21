@@ -7,14 +7,11 @@ function processTransactions(transActions) {
 
   let txCount = {};
 
-  const numberOfTransactions = transActions.length;
-
-  for (var i = 0; i < numberOfTransactions; i++) {
-    const transaction = transActions[i];
+  transActions.forEach((transaction) =>
     txCount[transaction]
       ? (txCount[transaction] += 1)
-      : (txCount[transaction] = 1);
-  }
+      : (txCount[transaction] = 1)
+  );
 
   txCount = sortByAmountThenName(txCount);
 
