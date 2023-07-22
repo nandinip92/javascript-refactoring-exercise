@@ -1,9 +1,7 @@
 function processTransactions(transActions) {
   let txr = [];
 
-  if (!validateTransactions(transActions)) {
-    throw new Error("Undefined collection of transactions");
-  }
+  if (!transActions) throw new Error("Undefined collection of transactions");
 
   let txCount = {};
 
@@ -16,27 +14,18 @@ function processTransactions(transActions) {
   txCount = sortByAmountThenName(txCount);
 
   // Place them back in array for returning
-  Object.keys(txCount).forEach((key) => txr.push(`${key} ${txCount[key]}`));
-
-  /*
   Object.keys(txCount).forEach(function (key, index) {
     txr[index] = `${key} ${txCount[key]}`;
   });
-*/
+
   return txr;
 }
 
 function sortByAmountThenName(txCount) {
-  let sortedKeys = Object.keys(txCount).sort(function sortingFunction(
-    itemOne,
-    itemTwo
-  ) {
-    return (
-      txCount[itemTwo] - txCount[itemOne] ||
-      itemOne > itemTwo ||
-      -(itemOne < itemTwo)
-    );
-  });
+  let sortedKeys = Object.keys(txCount).sort(
+    (itemOne, itemTwo) =>
+      txCount[itemTwo] - txCount[itemOne] || itemOne.localeCompare(itemTwo)
+  );
 
   let sortedResults = {};
   sortedKeys.forEach(
@@ -46,8 +35,8 @@ function sortByAmountThenName(txCount) {
   return sortedResults;
 }
 
-function validateTransactions(transactions) {
-  return transactions === undefined ? false : true;
-}
+// function validateTransactions(transactions) {
+//   return transactions === undefined ? false : true;
+// }
 
 module.exports = processTransactions;
