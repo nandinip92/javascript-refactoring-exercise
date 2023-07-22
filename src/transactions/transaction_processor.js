@@ -31,6 +31,17 @@ function sortByAmountThenName(txCount) {
   );
 
   return sortedResults;
+  /*
+  return Object.keys(txCount)
+    .sort(
+      (itemOne, itemTwo) =>
+        txCount[itemTwo] - txCount[itemOne] || itemOne.localeCompare(itemTwo)
+    )
+    .reduce((sortedResults, objectKey) => {
+      sortedResults[objectKey] = txCount[objectKey];
+      return sortedResults;
+    }, {});
+*/
 }
 
 // function validateTransactions(transactions) {
